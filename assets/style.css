@@ -12,7 +12,7 @@ body {
 
 #logo {
   color: white;
-  font-family: "Abril Fatface", cursive;
+  font-family: "Abril Fatface", sans-serif;
 }
 
 .nav-header {
@@ -23,6 +23,8 @@ body {
   justify-content: space-between;
   color: white;
   padding: 0rem 5rem 0rem 5rem;
+  z-index: 2;
+  position: relative;
 }
 
 .line1,
@@ -33,6 +35,17 @@ body {
   margin: 0.6rem;
   background: white;
   pointer-events: none;
+}
+.line1.active,
+.line2.active {
+  width: 2.5rem;
+  height: 0.1rem;
+  margin: 0.6rem;
+  background: black;
+  pointer-events: none;
+}
+.line3.active {
+  display: none;
 }
 
 .slide {
@@ -113,7 +126,6 @@ body {
   justify-content: space-around;
   align-items: center;
   z-index: 1;
-  opacity: 1;
   clip-path: circle(50px at 100% -10%);
   -webkit-clip-path: circle(50px at 100% -10%);
 }
@@ -162,7 +174,9 @@ body {
 }
 .cursor.nav-active {
   background: rgb(86, 124, 228);
+  opacity: 0.5;
   transform: scale(2);
+  position: absolute;
 }
 .cursor.explore-active {
   background: white;
@@ -200,4 +214,8 @@ body {
 
 .scrollmagic-pin-spacer {
   position: static !important;
+}
+
+body.hide {
+  overflow: hidden;
 }
