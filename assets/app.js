@@ -110,6 +110,7 @@ function navToggle(event) {
 }
 
 // Barba Page Tansitions
+
 barba.init({
   views: [
     {
@@ -129,19 +130,32 @@ barba.init({
   ],
   transitions: [
     {
-      leave({ current, next }) {
+      leave({ current }) {
         let done = this.async();
 
         // animation
-        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-        tl.fromTo(current.container, 1, { opacity: 1 }, { opacity: 0 });
+        const tl = new gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        tl.fromTo(
+          current.container,
+          1,
+          { opacity: 1 },
+          { opacity: 0, onComplete: done }
+        );
       },
-      enter({ current, next }) {
+      enter({ next }) {
         let done = this.async();
 
+        // scroll to the top
+        window.scrollTo(0, 0);
+
         // animation
-        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-        tl.fromTo(current.container, 1, { opacity: 0 }, { opacity: 1 });
+        const tl = new gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        tl.fromTo(
+          next.container,
+          1,
+          { opacity: 0 },
+          { opacity: 1, onComplete: done }
+        );
       },
     },
   ],
@@ -151,5 +165,3 @@ barba.init({
 burger.addEventListener("click", navToggle);
 window.addEventListener("mousemove", cursor);
 window.addEventListener("mouseover", activeCursor);
-
-animateSlides();
