@@ -109,6 +109,44 @@ function navToggle(event) {
   }
 }
 
+// Barba Page Tansitions
+barba.init({
+  views: [
+    {
+      namespace: "home",
+      beforeEnter() {
+        animateSlides();
+      },
+      beforeLeave() {
+        slideScene.destroy();
+        pageScene.destroy();
+        controller.destroy();
+      },
+    },
+    {
+      namespace: "fashion",
+    },
+  ],
+  transitions: [
+    {
+      leave({ current, next }) {
+        let done = this.async();
+
+        // animation
+        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        tl.fromTo(current.container, 1, { opacity: 1 }, { opacity: 0 });
+      },
+      enter({ current, next }) {
+        let done = this.async();
+
+        // animation
+        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        tl.fromTo(current.container, 1, { opacity: 0 }, { opacity: 1 });
+      },
+    },
+  ],
+});
+
 // EventListeners
 burger.addEventListener("click", navToggle);
 window.addEventListener("mousemove", cursor);
