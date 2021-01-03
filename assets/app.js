@@ -111,12 +111,14 @@ function navToggle(event) {
 
 // Barba Page Tansitions
 
+const logo = document.querySelector("#logo");
 barba.init({
   views: [
     {
       namespace: "home",
       beforeEnter() {
         animateSlides();
+        logo.href = "./index.html";
       },
       beforeLeave() {
         slideScene.destroy();
@@ -126,6 +128,9 @@ barba.init({
     },
     {
       namespace: "fashion",
+      beforeEnter() {
+        logo.href = "../index.html";
+      },
     },
   ],
   transitions: [
@@ -134,7 +139,7 @@ barba.init({
         let done = this.async();
 
         // animation
-        const tl = new gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
         tl.fromTo(
           current.container,
           1,
@@ -149,7 +154,7 @@ barba.init({
         window.scrollTo(0, 0);
 
         // animation
-        const tl = new gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
         tl.fromTo(
           next.container,
           1,
