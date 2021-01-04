@@ -313,6 +313,9 @@ body.hide {
   .hero-desc {
     padding: 0;
   }
+  .hero-img {
+    padding-top: 4rem;
+  }
   .hero-desc h2 {
     font-size: 1.6rem;
     padding: 1rem 0rem;
@@ -326,5 +329,9 @@ body.hide {
   .explore {
     width: 60%;
     margin: auto;
+  }
+  .detail-slide {
+    width: 100%;
+    text-align: center;
   }
 }
