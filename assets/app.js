@@ -118,6 +118,7 @@ barba.init({
     {
       namespace: "home",
       beforeEnter() {
+        window.scrollTo(0, 0);
         animateSlides();
         logo.href = "./index.html";
       },
@@ -130,6 +131,7 @@ barba.init({
     {
       namespace: "fashion",
       beforeEnter() {
+        window.scrollTo(0, 0);
         logo.href = "../index.html";
         detailAnimation();
       },
@@ -198,12 +200,26 @@ function detailAnimation() {
     });
     slideTl.fromTo(img, { scale: 0 }, { scale: 1 }, "-=.01");
 
+    // create scene
+    slideScene = new ScrollMagic.Scene({
+      triggerElement: slide,
+      triggerHook: 0.25,
+      reverse: false,
+    })
+      .setTween(slideTl)
+      .addIndicators({
+        colorStart: "white",
+        colorTrigger: "white",
+        name: "slide",
+      })
+      .addTo(controller);
+
     // new animation
     const pageTl = gsap.timeline();
     let nextSlide = slides.length - 1 === index ? "end" : slides[index + 1];
     pageTl.fromTo(nextSlide, { y: "0%" }, { y: "50%" });
     pageTl.fromTo(slide, { opacity: 1, scale: 1 }, { opacity: 0, scale: 0 });
-    pageTl.fromTo(nextSlide, { y: "50%" }, { y: "0%" }, "-=0.1");
+    pageTl.fromTo(nextSlide, { y: "100%" }, { y: "0%" }, "-=0.2");
 
     // create new scene
     pageScene = new ScrollMagic.Scene({

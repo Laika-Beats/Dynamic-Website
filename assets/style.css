@@ -300,6 +300,27 @@ body.hide {
   z-index: 3;
 }
 
+@media screen and (max-width: 1500px) {
+  .hero-img {
+    height: 50vh;
+  }
+  .fashion-img {
+    width: 100%;
+    height: auto;
+  }
+  .fashion-text h1 {
+    font-size: 2rem;
+    padding: 1rem 0rem;
+  }
+  .fashion-text p {
+    font-size: 1.2rem;
+  }
+  /* .fashion-img img {
+    height: 50vh;
+    object-position: top;
+  } */
+}
+
 @media screen and (max-width: 1024px) {
   main {
     width: 100%;
@@ -332,6 +353,35 @@ body.hide {
   }
   .detail-slide {
     width: 100%;
+    text-align: center;
+  }
+  .fashion-text p {
+    margin-bottom: 1rem;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+  }
+  .fashion-text h1 {
+    font-size: 4rem;
+    padding: 1rem 0rem;
+  }
+  .fashion-nr {
+    font-size: 0.8rem;
+  }
+  .nav-bar {
+    display: block;
+  }
+  .nav-links {
+    font-size: 1rem;
+    margin: 7rem;
+    text-align: center;
+  }
+  .contact h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .contact p {
+    font-size: 1rem;
+    padding: 1rem;
     text-align: center;
   }
 }
