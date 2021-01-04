@@ -1,5 +1,7 @@
 let controller;
 let slideScene;
+let pageScene;
+let detailScene;
 const burger = document.querySelector(".burger");
 
 function animateSlides() {
@@ -23,7 +25,6 @@ function animateSlides() {
     slideTl.fromTo(revealImg, { x: "0%" }, { x: "100%" });
     slideTl.fromTo(img, { scale: 2 }, { scale: 1 }, "-=1");
     slideTl.fromTo(revealText, { x: "0%" }, { x: "100%" }, "-=0.75");
-    slideTl.fromTo(nav, { y: "-100%" }, { y: "0%" }, "-=0.5");
 
     // create scene
     slideScene = new ScrollMagic.Scene({
@@ -130,6 +131,11 @@ barba.init({
       namespace: "fashion",
       beforeEnter() {
         logo.href = "../index.html";
+        detailAnimation();
+      },
+      beforeLeave() {
+        controller.destroy();
+        detailScene.destroy();
       },
     },
   ],
@@ -161,13 +167,61 @@ barba.init({
           ".swipe",
           0.75,
           { x: "0%" },
+
           { x: "100%", stagger: 0.3, onComplete: done }
         );
         tl.fromTo(next.container, 1, { opacity: 0 }, { opacity: 1 });
+        tl.fromTo(
+          ".nav-header",
+          1,
+          { y: "100%" },
+          { y: "0%", ease: "power2.inOut" },
+          "-=1.5"
+        );
       },
     },
   ],
 });
+
+function detailAnimation() {
+  controller = new ScrollMagic.Controller();
+  const sliders = document.querySelectorAll(".detail-slide");
+  sliders.forEach((slide, index, slides) => {
+    const revealImg = slide.querySelector(".reveal-img");
+    const img = slide.querySelector("img");
+    const revealText = slide.querySelector(".fashion-text");
+
+    // GSAP
+    gsap.config({ nullTargetWarn: false });
+    const slideTl = gsap.timeline({
+      defaults: { duration: 0.5, ease: "power2.inOut" },
+    });
+    slideTl.fromTo(img, { scale: 0 }, { scale: 1 }, "-=.01");
+
+    // new animation
+    const pageTl = gsap.timeline();
+    let nextSlide = slides.length - 1 === index ? "end" : slides[index + 1];
+    pageTl.fromTo(nextSlide, { y: "0%" }, { y: "50%" });
+    pageTl.fromTo(slide, { opacity: 1, scale: 1 }, { opacity: 0, scale: 0 });
+    pageTl.fromTo(nextSlide, { y: "50%" }, { y: "0%" }, "-=0.1");
+
+    // create new scene
+    pageScene = new ScrollMagic.Scene({
+      triggerElement: slide,
+      duration: "100%",
+      triggerHook: 0,
+    })
+      .addIndicators({
+        colorStart: "white",
+        colorTrigger: "white",
+        name: "page",
+        indent: 200,
+      })
+      .setPin(slide, { pushFollowers: false })
+      .setTween(pageTl)
+      .addTo(controller);
+  });
+}
 
 // EventListeners
 burger.addEventListener("click", navToggle);
