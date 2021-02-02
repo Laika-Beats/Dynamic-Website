@@ -4,4 +4,4 @@ https://laika-beats.github.io/Dynamic-Website/
 
 A boilerplate dynamic website with animations
 
-![](assets/ModernWebsite.gif)
+![](assets/ModernWebsite.png)
